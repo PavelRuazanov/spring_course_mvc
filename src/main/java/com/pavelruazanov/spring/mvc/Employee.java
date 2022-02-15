@@ -2,10 +2,9 @@ package com.pavelruazanov.spring.mvc;
 
 
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import com.pavelruazanov.spring.mvc.validation.CheckEmail;
+
+import javax.validation.constraints.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +15,9 @@ public class Employee {
 //    @NotEmpty(message = "Это обязательное поле")
     @NotBlank(message = "Это обязательное поле")
     private String surname;
+
+    @Min(value = 500, message = "Должна быть больше чем 499")
+    @Max(value = 1500, message = "Должа быть меньше чем 1500")
     private int salary;
     private String department;
     private Map<String, String> departments;
@@ -23,6 +25,11 @@ public class Employee {
     private Map<String, String> carBrands;
     private String[] languages;
     private Map<String, String> languageList;
+    @CheckEmail
+    private String email;
+
+    @Pattern(regexp = "\\d{3}-\\d{2}-\\d{2}", message = "Пожалуйста используйте шаблон ХХХ-ХХ-ХХ")
+    private String phoneNumber;
 
     public Employee() {
         departments = new HashMap<>();
@@ -113,6 +120,23 @@ public class Employee {
 
     public void setLanguageList(Map<String, String> languageList) {
         this.languageList = languageList;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
